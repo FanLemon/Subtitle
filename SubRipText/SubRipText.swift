@@ -71,7 +71,7 @@ extension ZeroPaddedTimeDigital {
             return nil
         }
         
-        guard intValue < Self.maxValue else {
+        guard intValue <= Self.maxValue else {
             return nil
         }
         

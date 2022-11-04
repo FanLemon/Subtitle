@@ -57,6 +57,11 @@ final class SubRipTextTests: XCTestCase {
         XCTAssertNotNil(option_td)
         XCTAssertEqual(option_td!.value, 6)
         XCTAssertEqual(option_td!.expression, "06")
+        
+        option_td = TimeDigital_60.scan(strValue: "59")
+        XCTAssertNotNil(option_td)
+        XCTAssertEqual(option_td!.value, 59)
+        XCTAssertEqual(option_td!.expression, "59")
     }
 
     func testTimeDigital_1000() throws {
@@ -101,6 +106,11 @@ final class SubRipTextTests: XCTestCase {
         XCTAssertNotNil(option_td)
         XCTAssertEqual(option_td!.value, 66)
         XCTAssertEqual(option_td!.expression, "066")
+        
+        option_td = TimeDigital_1000.scan(strValue: "999")
+        XCTAssertNotNil(option_td)
+        XCTAssertEqual(option_td!.value, 999)
+        XCTAssertEqual(option_td!.expression, "999")
     }
     
     func testTimecode() throws {
@@ -134,7 +144,7 @@ final class SubRipTextTests: XCTestCase {
     func testSubRipText() throws {
         let sample = """
         1
-        00:00:03,400 --> 00:00:06,177
+        00:00:59,400 --> 00:00:06,177
         In this lesson, we're going to
         be talking about finance. And
 
@@ -239,12 +249,12 @@ final class SubRipTextTests: XCTestCase {
         investment, I'm going to have to invest
 
         22
-        00:01:41,480 --> 00:01:46,860
+        00:01:41,480 --> 00:59:46,860
         more money, leave the money in the
         account for a longer period of time, or
 
         43
-        00:01:46,860 --> 00:01:49,970
+        00:01:46,860 --> 00:01:59,970
         find an institution that will pay
         me a higher interest rate.
         """

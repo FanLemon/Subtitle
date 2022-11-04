@@ -49,7 +49,7 @@ struct ConsoleLog {
 
 let usage = """
 
-SubRipText Version 1.0.0
+SubRipText Version 1.0.1
 
 usage: SubRipText INPUT_FILE OUTPUT_FILE SHIFT_MS
        SubRipText INPUT_FILE OUTPUT_FILE hh:mm:ss,mmm --> hh:mm:ss,mmm
