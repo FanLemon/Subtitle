@@ -11,10 +11,21 @@
 		316AC9AC291345C20018102C /* SubRipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316AC9AB291345C20018102C /* SubRipText.swift */; };
 		316AC9B4291347FD0018102C /* SubRipTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316AC9B3291347FD0018102C /* SubRipTextTests.swift */; };
 		316AC9B82913483B0018102C /* SubRipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316AC9AB291345C20018102C /* SubRipText.swift */; };
+		3196E7C22A4A62FE00F211D0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3196E7C12A4A62FE00F211D0 /* main.cpp */; };
+		3196E7C82A4A63E700F211D0 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3196E7C72A4A63E700F211D0 /* libiconv.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		316AC9A2291345400018102C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		3196E7BD2A4A62FE00F211D0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -31,6 +42,9 @@
 		316AC9AB291345C20018102C /* SubRipText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubRipText.swift; sourceTree = "<group>"; };
 		316AC9B1291347FD0018102C /* SubRipTextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubRipTextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		316AC9B3291347FD0018102C /* SubRipTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubRipTextTests.swift; sourceTree = "<group>"; };
+		3196E7BF2A4A62FE00F211D0 /* ARIB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ARIB; sourceTree = BUILT_PRODUCTS_DIR; };
+		3196E7C12A4A62FE00F211D0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3196E7C72A4A63E700F211D0 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +59,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3196E7BC2A4A62FE00F211D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3196E7C82A4A63E700F211D0 /* libiconv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +95,9 @@
 			children = (
 				316AC9A5291345400018102C /* SubRipText */,
 				316AC9B2291347FD0018102C /* SubRipTextTests */,
+				3196E7C02A4A62FE00F211D0 /* ARIB */,
 				317106132912BD2600886436 /* Products */,
+				3196E7C62A4A63E700F211D0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,8 +106,25 @@
 			children = (
 				316AC9A4291345400018102C /* SubRipText */,
 				316AC9B1291347FD0018102C /* SubRipTextTests.xctest */,
+				3196E7BF2A4A62FE00F211D0 /* ARIB */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3196E7C02A4A62FE00F211D0 /* ARIB */ = {
+			isa = PBXGroup;
+			children = (
+				3196E7C12A4A62FE00F211D0 /* main.cpp */,
+			);
+			path = ARIB;
+			sourceTree = "<group>";
+		};
+		3196E7C62A4A63E700F211D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3196E7C72A4A63E700F211D0 /* libiconv.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +164,23 @@
 			productReference = 316AC9B1291347FD0018102C /* SubRipTextTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3196E7BE2A4A62FE00F211D0 /* ARIB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3196E7C52A4A62FE00F211D0 /* Build configuration list for PBXNativeTarget "ARIB" */;
+			buildPhases = (
+				3196E7BB2A4A62FE00F211D0 /* Sources */,
+				3196E7BC2A4A62FE00F211D0 /* Frameworks */,
+				3196E7BD2A4A62FE00F211D0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARIB;
+			productName = ARIB;
+			productReference = 3196E7BF2A4A62FE00F211D0 /* ARIB */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -131,13 +189,16 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					316AC9A3291345400018102C = {
 						CreatedOnToolsVersion = 14.1;
 					};
 					316AC9B0291347FD0018102C = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					3196E7BE2A4A62FE00F211D0 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -156,6 +217,7 @@
 			targets = (
 				316AC9A3291345400018102C /* SubRipText */,
 				316AC9B0291347FD0018102C /* SubRipTextTests */,
+				3196E7BE2A4A62FE00F211D0 /* ARIB */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +251,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3196E7BB2A4A62FE00F211D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3196E7C22A4A62FE00F211D0 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -196,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = G5X3447297;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -207,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = G5X3447297;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -219,6 +291,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = G5X3447297;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -239,6 +312,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = G5X3447297;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -287,6 +361,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -347,6 +422,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -364,6 +440,30 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3196E7C32A4A62FE00F211D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = G5X3447297;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3196E7C42A4A62FE00F211D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = G5X3447297;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -393,6 +493,15 @@
 			buildConfigurations = (
 				317106172912BD2600886436 /* Debug */,
 				317106182912BD2600886436 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3196E7C52A4A62FE00F211D0 /* Build configuration list for PBXNativeTarget "ARIB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3196E7C32A4A62FE00F211D0 /* Debug */,
+				3196E7C42A4A62FE00F211D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
