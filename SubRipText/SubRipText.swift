@@ -90,9 +90,9 @@ extension ZeroPaddedTimeDigital {
 
 struct TimeDigital_60: ZeroPaddedTimeDigital {
     
-    static var maxValue: Int = 59
+    static let maxValue: Int = 59
     
-    static var literalWidth: Int = 2
+    static let literalWidth: Int = 2
     
     var value: Int = 0
     
@@ -104,9 +104,9 @@ struct TimeDigital_60: ZeroPaddedTimeDigital {
 
 struct TimeDigital_1000: ZeroPaddedTimeDigital {
     
-    static var maxValue: Int = 999
+    static let maxValue: Int = 999
     
-    static var literalWidth: Int = 3
+    static let literalWidth: Int = 3
     
     var value: Int = 0
     
@@ -124,32 +124,6 @@ struct TimeDigital_1000: ZeroPaddedTimeDigital {
 ///
 
 struct Timecode {
-    
-    static let pattern = Regex {
-        Capture {
-            Repeat(count: 2) {
-                One(.digit)
-            }
-        }
-        ":"
-        Capture {
-            Repeat(count: 2) {
-                One(.digit)
-            }
-        }
-        ":"
-        Capture {
-            Repeat(count: 2) {
-                One(.digit)
-            }
-        }
-        ","
-        Capture {
-            Repeat(count: 3) {
-                One(.digit)
-            }
-        }
-    }
     
     static let MILLISECONDS_PER_SECOND = 1000
     static let MILLISECONDS_PER_MINUTE = 60 * Timecode.MILLISECONDS_PER_SECOND
@@ -243,31 +217,58 @@ struct TimecodeDuration {
     
     enum ParsingError: Error {
         
+        case invalidFormat(String)
         case startTimecodeInvalid(String)
         case endTimecodeInvalid(String)
     }
     
     static let delimiter = "-->"
     
-    static let pattern = Regex {
-        Capture {
-            Timecode.pattern
+    static func parse(_ strValue: String) throws -> TimecodeDuration {
+        let timecodePattern = Regex {
+            Capture {
+                Repeat(count: 2) {
+                    One(.digit)
+                }
+            }
+            ":"
+            Capture {
+                Repeat(count: 2) {
+                    One(.digit)
+                }
+            }
+            ":"
+            Capture {
+                Repeat(count: 2) {
+                    One(.digit)
+                }
+            }
+            ","
+            Capture {
+                Repeat(count: 3) {
+                    One(.digit)
+                }
+            }
         }
-        OneOrMore {
-            .whitespace
+        
+        let timecodeDurationPattern = Regex {
+            Capture {
+                timecodePattern
+            }
+            OneOrMore {
+                .whitespace
+            }
+            TimecodeDuration.delimiter
+            OneOrMore {
+                .whitespace
+            }
+            Capture {
+                timecodePattern
+            }
         }
-        TimecodeDuration.delimiter
-        OneOrMore {
-            .whitespace
-        }
-        Capture {
-            Timecode.pattern
-        }
-    }
-    
-    static func match(strValue: String) throws -> TimecodeDuration? {
-        guard let match = strValue.wholeMatch(of: TimecodeDuration.pattern) else {
-            return nil
+        
+        guard let match = strValue.wholeMatch(of: timecodeDurationPattern) else {
+            throw ParsingError.invalidFormat(strValue)
         }
         
         let (_, start, startHours, startMinutes, startSeconds, startMilliseconds, end, endHours, endMinutes, endSeconds, endMilliseconds) = match.output
@@ -287,6 +288,7 @@ struct TimecodeDuration {
         
         return TimecodeDuration(startTime: Timecode(h: startHoursTimeDigital, m: startMinutesTimeDigital, s: startSecondsTimeDigital, ms: startMillisecondsTimeDigital), endTime: Timecode(h: endHoursTimeDigital, m: endMinutesTimeDigital, s: endSecondsTimeDigital, ms: endMillisecondsTimeDigital))
     }
+    
     
     var start: Timecode
     var end: Timecode
@@ -407,20 +409,9 @@ struct SubRipText {
             partialResult.1.append(line)
 
             // 1. Detect Timecode
-            var hadMatchedTimecode: Bool = false
             do {
-                if (try TimecodeDuration.match(strValue: line)) != nil {
-                    hadMatchedTimecode = true
-                }
-            } catch TimecodeDuration.ParsingError.startTimecodeInvalid(let str) {
-                print("Start Timecode Parsing Fails. [\(str)] at line: \(linesIndex)")
-            } catch TimecodeDuration.ParsingError.endTimecodeInvalid(let str) {
-                print("End Timecode Parsing Fails. [\(str)] at line: \(linesIndex)")
-            } catch {
+                _ = try TimecodeDuration.parse(line)
                 
-            }
-            
-            if hadMatchedTimecode {
                 // number
                 // time
                 // xxx
@@ -431,7 +422,7 @@ struct SubRipText {
                 }
 
                 let timeLines = stripedLines.compactMap { s in
-                    return try? TimecodeDuration.match(strValue: s)
+                    return try? TimecodeDuration.parse(s)
                 }
 
                 if stripedLines.count >= 5, timeLines.count >= 2 {
@@ -449,6 +440,15 @@ struct SubRipText {
                     partialResult.1.removeAll()
                     partialResult.1.append(contentsOf: stripedLines[(stripedLines.count-2)...])
                 }
+                
+            } catch TimecodeDuration.ParsingError.invalidFormat(let str) {
+                print("Invaild Format. [\(str)] at line: \(linesIndex)")
+            } catch TimecodeDuration.ParsingError.startTimecodeInvalid(let str) {
+                print("Start Timecode Parsing Fails. [\(str)] at line: \(linesIndex)")
+            } catch TimecodeDuration.ParsingError.endTimecodeInvalid(let str) {
+                print("End Timecode Parsing Fails. [\(str)] at line: \(linesIndex)")
+            } catch {
+                print("Error at line: \(linesIndex)")
             }
         }
 

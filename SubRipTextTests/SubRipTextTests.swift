@@ -238,6 +238,8 @@ final class SubRipTextTests: XCTestCase {
         to borrow the money over a shorter period
         of time, or I'm going to have to find a
 
+        
+        
         20
         00:01:32,600 --> 00:41:37,279
         lending institution that charges a lower

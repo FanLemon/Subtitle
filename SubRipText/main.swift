@@ -49,7 +49,7 @@ struct ConsoleLog {
 
 let usage = """
 
-SubRipText Version 1.0.1
+SubRipText Version 1.0.2 Build with Swift 6
 
 usage: SubRipText INPUT_FILE OUTPUT_FILE SHIFT_MS
        SubRipText INPUT_FILE OUTPUT_FILE hh:mm:ss,mmm --> hh:mm:ss,mmm
@@ -72,7 +72,7 @@ let offsetMsOrDuration = CommandLine.arguments[3]
 
 var separatedFilePath: String?
 if offsetMsOrDuration.contains("-->") {
-    guard let duration = try? TimecodeDuration.match(strValue: offsetMsOrDuration) else {
+    guard let duration = try? TimecodeDuration.parse(offsetMsOrDuration) else {
         ConsoleLog.error(message: "Input parameters Offset error: ")
         exit(EXIT_SUCCESS)
     }
